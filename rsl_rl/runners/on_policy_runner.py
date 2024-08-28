@@ -64,13 +64,13 @@ class OnPolicyRunner:
             num_critic_obs = self.env.num_obs
         actor_critic_class = eval(self.cfg["policy_class_name"]) # ActorCritic
         if pretrained_model_path is not None:
-            self.actor_critic: ActorCritic = actor_critic_class( self.env.num_obs,
+            self.actor_critic: ActorCritic | ActorCriticRecurrent = actor_critic_class( self.env.num_obs,
                                                         num_critic_obs,
                                                         self.env.num_actions,
                                                         **self.policy_cfg).to(self.device)
             self.actor_critic.load_state_dict(torch.load(pretrained_model_path)['model_state_dict'])
         else:
-            self.actor_critic: ActorCritic = actor_critic_class( self.env.num_obs,
+            self.actor_critic: ActorCritic | ActorCriticRecurrent = actor_critic_class( self.env.num_obs,
                                                     num_critic_obs,
                                                     self.env.num_actions,
                                                     **self.policy_cfg).to(self.device)
@@ -92,7 +92,7 @@ class OnPolicyRunner:
 
         _, _ = self.env.reset()
     
-    def learn(self, num_learning_iterations, run=None, init_at_random_ep_len=False):
+    def learn(self, num_learning_iterations, init_at_random_ep_len=False):
         # initialize writer
         if self.log_dir is not None and self.writer is None:
             self.writer = SummaryWriter(log_dir=self.writer_log)
