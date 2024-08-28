@@ -21,6 +21,3 @@ Paper: https://arxiv.org/abs/2109.11978
 **Maintainer**: Nikita Rudin  
 **Affiliation**: Robotic Systems Lab, ETH Zurich & NVIDIA  
 **Contact**: rudinn@ethz.ch  
-
-
-

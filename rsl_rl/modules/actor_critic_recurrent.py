@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: Copyright (c) 2021 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 # SPDX-License-Identifier: BSD-3-Clause
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
 #
@@ -84,7 +84,7 @@ class ActorCriticRecurrent(ActorCritic):
     def evaluate(self, critic_observations, masks=None, hidden_states=None):
         input_c = self.memory_c(critic_observations, masks, hidden_states)
         return super().evaluate(input_c.squeeze(0))
-    
+
     def get_hidden_states(self):
         return self.memory_a.hidden_states, self.memory_c.hidden_states
 
@@ -96,7 +96,7 @@ class Memory(torch.nn.Module):
         rnn_cls = nn.GRU if type.lower() == 'gru' else nn.LSTM
         self.rnn = rnn_cls(input_size=input_size, hidden_size=hidden_size, num_layers=num_layers)
         self.hidden_states = None
-    
+
     def forward(self, input, masks=None, hidden_states=None):
         batch_mode = masks is not None
         if batch_mode:
