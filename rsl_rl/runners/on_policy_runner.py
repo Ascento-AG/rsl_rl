@@ -32,7 +32,6 @@ import time
 import os
 from collections import deque
 import statistics
-import neptune
 import shutil
 
 from torch.utils.tensorboard import SummaryWriter
